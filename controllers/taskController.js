@@ -11,6 +11,21 @@ const getTasks = async (req, res) => {
 };
 
 
+const createTask = async (req, res) => {
+  const { title, description } = req.body;
+  try {
+    const task = await taskModel.create({
+      title,
+      description,
+      userId: req.user.id
+    });
+    res.status(201).json(task);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
 
 
 module.exports = { getTasks, createTask, updateTask, deleteTask, toggleStatus };
