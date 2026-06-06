@@ -26,6 +26,18 @@ const createTask = async (req, res) => {
 };
 
 
+const updateTask = async (req, res) => {
+  try {
+    const task = await taskModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.status(200).json(task);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
 
 module.exports = { getTasks, createTask, updateTask, deleteTask, toggleStatus };
