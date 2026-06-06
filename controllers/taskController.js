@@ -40,4 +40,25 @@ const updateTask = async (req, res) => {
 };
 
 
+const deleteTask = async (req, res) => {
+  try {
+    await taskModel.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: 'Task deleted' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+const toggleStatus = async (req, res) => {
+  try {
+    const task = await taskModel.findById(req.params.id);
+    task.status = task.status === 'pending' ? 'completed' : 'pending';
+    await task.save();
+    res.status(200).json(task);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = { getTasks, createTask, updateTask, deleteTask, toggleStatus };
