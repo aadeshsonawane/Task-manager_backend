@@ -53,7 +53,15 @@ const deleteTask = async (req, res) => {
 const toggleStatus = async (req, res) => {
   try {
     const task = await taskModel.findById(req.params.id);
-    task.status = task.status === 'pending' ? 'completed' : 'pending';
+    
+    if(task.status === 'pending'){
+      task.status = 'incomplete';
+    } else if(task.status === 'incomplete'){
+      task.status = 'completed';
+    } else {
+      task.status = 'pending';
+    }
+    
     await task.save();
     res.status(200).json(task);
   } catch (err) {
