@@ -13,7 +13,7 @@ connectDB();
 
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://task-manager-frontend-kappa-two.vercel.app/'],
+  origin: ['http://localhost:5173', 'https://task-manager-frontend-kappa-two.vercel.app'],
   credentials: true
 }));
 app.use(express.json());
