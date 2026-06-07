@@ -5,7 +5,7 @@ const { getTasks, createTask, updateTask, deleteTask, toggleStatus } = require('
 
 router.get('/', protect, getTasks);
 router.post('/', protect, createTask);
-router.put('/:id', protect, updateTask);
+router.patch('/:id', protect, updateTask);
 router.delete('/:id', protect, deleteTask);
 router.patch('/:id/toggle', protect, toggleStatus);
 
