@@ -27,10 +27,11 @@ const createTask = async (req, res) => {
 
 
 const updateTask = async (req, res) => {
+  const { title, description } = req.body;
   try {
     const task = await taskModel.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      { title, description },  // ← fakt he 2 update hote
       { new: true }
     );
     res.status(200).json(task);
